@@ -1,11 +1,24 @@
 import type { NextConfig } from 'next';
-// import path from 'path';
+import path from 'path';
 
-// const useSourceFiles = process.env.USE_SOURCE_FILES === 'true';
-// const isDev = false; //process.env.NODE_ENV === 'development';
+const useSourceFiles = process.env.USE_SOURCE_FILES === 'true';
+const isDev = process.env.NODE_ENV === 'development';
 
 const nextConfig: NextConfig = {
   // transpilePackages: ['@legit-sdk/core', '@legit-sdk/assistant-ui'],
+    turbopack: {
+    resolveAlias: {
+      '@legit-sdk/core':
+        useSourceFiles || isDev
+          ? '../../packages/sdk/src'
+          : '../../packages/sdk/dist',
+      '@legit-sdk/assistant-ui':
+        useSourceFiles || isDev
+          ? '../../packages/sdk-assistant-ui/src'
+          : '../../packages/sdk-assistant-ui/dist',
+    },
+    resolveExtensions: ['.tsx', '.ts', '.jsx', '.js', '.mjs', '.json'],
+  },
   webpack: (config, { isServer, webpack }) => {
     // config.resolve.alias = {
     //   ...config.resolve.alias,
