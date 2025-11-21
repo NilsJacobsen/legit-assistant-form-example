@@ -54,9 +54,10 @@ export default function Home() {
   useEffect(() => {
     const saveFormValues = async () => {
       await saveData('/form-values.json', JSON.stringify(formValues));
+      console.log("Legit - Persisted form data")
     };
     saveFormValues();
-  }, [formValues, saveData]);
+  }, [formValues]);
 
   return (
     <AssistantFormProvider form={form}>

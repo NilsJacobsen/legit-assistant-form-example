@@ -36,6 +36,8 @@ export function MyRuntimeProvider({
       await new Promise(resolve => setTimeout(resolve, 1));
       return (window as any).threadContext;
     },
+    onFinish: () => console.log("Legit - Persisted chat message")
+    
   });
 
   useEffect(() => {
